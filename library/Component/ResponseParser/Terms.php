@@ -25,10 +25,10 @@ class Terms extends AbstractResponseParser implements ComponentParserInterface
      */
     public function parse($query, $terms, $data)
     {
-        $allTerms = [];
+        $allTerms = array();
 
         if (isset($data['terms']) && is_array($data['terms'])) {
-            $terms = [];
+            $terms = array();
             foreach ($data['terms'] as $field => $termData) {
                 $allTerms[] = $this->createTerms($termData);
                 $terms[$field] = $this->createTerms($termData);

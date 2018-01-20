@@ -70,12 +70,12 @@ class Guzzle extends Configurable implements AdapterInterface
     public function execute($request, $endpoint)
     {
         //@codingStandardsIgnoreEnd
-        $requestOptions = [
+        $requestOptions = array(
             RequestOptions::HEADERS => $this->getRequestHeaders($request),
             RequestOptions::BODY => $this->getRequestBody($request),
             RequestOptions::TIMEOUT => $endpoint->getTimeout(),
             RequestOptions::CONNECT_TIMEOUT => $endpoint->getTimeout(),
-        ];
+        );
 
         // Try endpoint authentication first, fallback to request for backwards compatibility
         $authData = $endpoint->getAuthentication();
@@ -84,7 +84,7 @@ class Guzzle extends Configurable implements AdapterInterface
         }
 
         if (!empty($authData['username']) && !empty($authData['password'])) {
-            $requestOptions[RequestOptions::AUTH] = [$authData['username'], $authData['password']];
+            $requestOptions[RequestOptions::AUTH] = array($authData['username'], $authData['password']);
         }
 
         try {
@@ -94,10 +94,10 @@ class Guzzle extends Configurable implements AdapterInterface
                 $requestOptions
             );
 
-            $responseHeaders = [
+            $responseHeaders = array(
                 "HTTP/{$guzzleResponse->getProtocolVersion()} {$guzzleResponse->getStatusCode()} "
                 . $guzzleResponse->getReasonPhrase(),
-            ];
+            );
 
             foreach ($guzzleResponse->getHeaders() as $key => $value) {
                 $responseHeaders[] = "{$key}: " . implode(', ', $value);
@@ -154,7 +154,7 @@ class Guzzle extends Configurable implements AdapterInterface
      */
     private function getRequestHeaders(Request $request)
     {
-        $headers = [];
+        $headers = array();
         foreach ($request->getHeaders() as $headerLine) {
             list($header, $value) = explode(':', $headerLine);
             if ($header = trim($header)) {

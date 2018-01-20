@@ -48,10 +48,10 @@ class DictionaryTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->terms = [
-            'foo' => new Term(2, [['term' => 'foo'], ['term' => 'foobar']]),
-            'zoo' => new Term(1, [['term' => 'zoo keeper']]),
-        ];
+        $this->terms = array(
+            'foo' => new Term(2, array(array('term' => 'foo'), array('term' => 'foobar'))),
+            'zoo' => new Term(1, array(array('term' => 'zoo keeper'))),
+        );
 
         $this->dictionary = new Dictionary($this->terms);
     }

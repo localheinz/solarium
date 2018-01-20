@@ -53,16 +53,16 @@ class ResultTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->data = [
-            'dictionary1' => new Dictionary([
+        $this->data = array(
+            'dictionary1' => new Dictionary(array(
                 'term1' => 'data1',
                 'term2' => 'data2',
-            ]),
-            'dictionary2' => new Dictionary([
+            )),
+            'dictionary2' => new Dictionary(array(
                 'term3' => 'data3',
-            ]),
-        ];
-        $this->allData = ['data1', 'data2', 'data3'];
+            )),
+        );
+        $this->allData = array('data1', 'data2', 'data3');
         $this->result = new SuggesterDummy($this->data, $this->allData);
     }
 

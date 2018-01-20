@@ -97,18 +97,18 @@ class ResponseParserTest extends \PHPUnit_Framework_TestCase
         $result = $parser->parse($resultStub);
 
         $expected = array(
-            'dictionary1' => new Dictionary([
-                'foo' => new Term(2, [['term' => 'foo'], ['term' => 'foobar']]),
-                'zoo' => new Term(1, [['term' => 'zoo keeper']]),
-            ]),
-            'dictionary2' => new Dictionary([
-                'free' => new Term(2, [['term' => 'free beer'], ['term' => 'free software']]),
-            ]),
+            'dictionary1' => new Dictionary(array(
+                'foo' => new Term(2, array(array('term' => 'foo'), array('term' => 'foobar'))),
+                'zoo' => new Term(1, array(array('term' => 'zoo keeper'))),
+            )),
+            'dictionary2' => new Dictionary(array(
+                'free' => new Term(2, array(array('term' => 'free beer'), array('term' => 'free software'))),
+            )),
         );
         $allExpected = array(
-            new Term(2, [['term' => 'foo'], ['term' => 'foobar']]),
-            new Term(1, [['term' => 'zoo keeper']]),
-            new Term(2, [['term' => 'free beer'], ['term' => 'free software']]),
+            new Term(2, array(array('term' => 'foo'), array('term' => 'foobar'))),
+            new Term(1, array(array('term' => 'zoo keeper'))),
+            new Term(2, array(array('term' => 'free beer'), array('term' => 'free software'))),
         );
 
         $this->assertEquals($expected, $result['results']);

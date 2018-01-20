@@ -62,15 +62,15 @@ class ResponseParser extends ResponseParserAbstract implements ResponseParserInt
         $data = $result->getData();
         $query = $result->getQuery();
 
-        $dictionaries = [];
-        $allSuggestions = [];
+        $dictionaries = array();
+        $allSuggestions = array();
 
         if (isset($data['suggest']) && is_array($data['suggest'])) {
             $dictionaryClass = $query->getOption('dictionaryclass');
             $termClass = $query->getOption('termclass');
 
             foreach ($data['suggest'] as $dictionary => $dictionaryResults) {
-                $terms = [];
+                $terms = array();
                 foreach ($dictionaryResults as $term => $termData) {
                     $allSuggestions[] = $this->createTerm($termClass, $termData);
                     $terms[$term] = $this->createTerm($termClass, $termData);
@@ -81,10 +81,10 @@ class ResponseParser extends ResponseParserAbstract implements ResponseParserInt
 
         return $this->addHeaderInfo(
             $data,
-            [
+            array(
                 'results' => $dictionaries,
                 'all' => $allSuggestions,
-            ]
+            )
         );
     }
 

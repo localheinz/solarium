@@ -14,14 +14,14 @@ trait ComponentAwareQueryTrait
      *
      * @var AbstractComponent[]
      */
-    protected $components = [];
+    protected $components = array();
 
     /**
      * Default select query component types.
      *
      * @var array
      */
-    protected $componentTypes = [];
+    protected $componentTypes = array();
 
     /**
      * Get all registered component types.

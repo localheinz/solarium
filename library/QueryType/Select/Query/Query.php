@@ -149,7 +149,7 @@ class Query extends AbstractQuery implements ComponentAwareQueryInterface
 
     public function __construct($options = null)
     {
-        $this->componentTypes = [
+        $this->componentTypes = array(
             ComponentAwareQueryInterface::COMPONENT_MORELIKETHIS      => 'Solarium\Component\MoreLikeThis',
             ComponentAwareQueryInterface::COMPONENT_SPELLCHECK        => 'Solarium\Component\Spellcheck',
             ComponentAwareQueryInterface::COMPONENT_SUGGESTER         => 'Solarium\Component\Suggester',
@@ -162,7 +162,7 @@ class Query extends AbstractQuery implements ComponentAwareQueryInterface
             ComponentAwareQueryInterface::COMPONENT_GROUPING          => 'Solarium\Component\Grouping',
             ComponentAwareQueryInterface::COMPONENT_DISTRIBUTEDSEARCH => 'Solarium\Component\DistributedSearch',
             ComponentAwareQueryInterface::COMPONENT_STATS             => 'Solarium\Component\Stats\Stats',
-        ];
+        );
 
         parent::__construct($options);
     }

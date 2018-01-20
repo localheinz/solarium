@@ -25,12 +25,12 @@ class Suggester extends AbstractResponseParser implements ComponentParserInterfa
      */
     public function parse($query, $suggester, $data)
     {
-        $dictionaries = [];
-        $allSuggestions = [];
+        $dictionaries = array();
+        $allSuggestions = array();
 
         if (isset($data['suggest']) && is_array($data['suggest'])) {
             foreach ($data['suggest'] as $dictionary => $dictionaryResults) {
-                $terms = [];
+                $terms = array();
                 foreach ($dictionaryResults as $term => $termData) {
                     $allSuggestions[] = $this->createTerm($termData);
                     $terms[$term] = $this->createTerm($termData);

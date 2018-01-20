@@ -53,10 +53,10 @@ class TermTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->numFound = 5;
-        $this->suggestions = [
+        $this->suggestions = array(
             'suggestion1',
             'suggestion2',
-        ];
+        );
 
         $this->result = new Term($this->numFound, $this->suggestions);
     }

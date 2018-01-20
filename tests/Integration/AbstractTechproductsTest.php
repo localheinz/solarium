@@ -15,18 +15,18 @@ abstract class AbstractTechproductsTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $config = [
-            'endpoint' => [
-                'localhost' => [
+        $config = array(
+            'endpoint' => array(
+                'localhost' => array(
                     'host' => '127.0.0.1',
                     'port' => 8983,
                     'path' => '/solr/',
                     'core' => 'techproducts',
-                ]
-            ],
+                )
+            ),
             // Curl is the default adapter.
             //'adapter' => 'Solarium\Core\Client\Adapter\Curl',
-        ];
+        );
 
         $this->client = new \Solarium\Client($config);
 
@@ -52,17 +52,17 @@ abstract class AbstractTechproductsTest extends \PHPUnit_Framework_TestCase
     public function testSelect()
     {
         $select = $this->client->createSelect();
-        $select->setSorts(['id' => SelectQuery::SORT_ASC]);
+        $select->setSorts(array('id' => SelectQuery::SORT_ASC));
         $result = $this->client->select($select);
         $this->assertEquals(32, $result->getNumFound());
         $this->assertEquals(10, $result->count());
 
-        $ids = [];
+        $ids = array();
         /** @var \Solarium\QueryType\Select\Result\Document $document */
         foreach ($result as $document) {
             $ids[] = $document->id;
         }
-        $this->assertEquals([
+        $this->assertEquals(array(
             "0579B002",
             "100-435805",
             "3007WFP",
@@ -73,7 +73,7 @@ abstract class AbstractTechproductsTest extends \PHPUnit_Framework_TestCase
             "F8V7067-APL-KIT",
             "GB18030TEST",
             "GBP",
-            ], $ids);
+            ), $ids);
     }
 
     public function testSpellcheck()
@@ -83,18 +83,18 @@ abstract class AbstractTechproductsTest extends \PHPUnit_Framework_TestCase
         // Some spellcheck dictionaries needs to build first, but not on every request!
         $spellcheck->setBuild(true);
         $result = $this->client->spellcheck($spellcheck);
-        $words = [];
+        $words = array();
         foreach ($result as $term => $suggestions) {
             $this->assertEquals('cort', $term);
             foreach ($suggestions as $suggestion) {
                 $words[] = $suggestion['word'];
             }
         }
-        $this->assertEquals([
+        $this->assertEquals(array(
             'corp',
             'cord',
             'card',
-            ], $words);
+            ), $words);
     }
 
     public function testSuggester()
@@ -106,7 +106,7 @@ abstract class AbstractTechproductsTest extends \PHPUnit_Framework_TestCase
         // A suggester dictionary needs to build first, but not on every request!
         $suggester->setBuild(true);
         $result = $this->client->suggester($suggester);
-        $phrases = [];
+        $phrases = array();
         foreach ($result as $dictionary => $terms) {
             $this->assertEquals('mySuggester', $dictionary);
             foreach ($terms as $term => $suggestions) {
@@ -116,11 +116,11 @@ abstract class AbstractTechproductsTest extends \PHPUnit_Framework_TestCase
                 }
             }
         }
-        $this->assertEquals([
+        $this->assertEquals(array(
             'electronics',
             'electronics and computer1',
             'electronics and stuff2'
-            ], $phrases);
+            ), $phrases);
     }
 
     public function testTerms()
@@ -128,13 +128,13 @@ abstract class AbstractTechproductsTest extends \PHPUnit_Framework_TestCase
         $terms = $this->client->createTerms();
         $terms->setFields('name');
         $result = $this->client->terms($terms);
-        $phrases = [];
+        $phrases = array();
         foreach ($result->getTerms('name') as $term => $count) {
             $phrases[] = $term;
         }
-        $this->assertEquals([
+        $this->assertEquals(array(
             'one', 184, '1gb', 3200, 400, 'ddr', 'gb', 'ipod', 'memory', 'pc',
-        ], $phrases);
+        ), $phrases);
     }
 
 }
